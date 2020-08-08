@@ -14,7 +14,7 @@ dir_paths = []
 def doDirs(mydir):
     '''make a new dir
     or delete an old dir'''
-    mydir = os.path.join('../foto',mydir)
+    mydir = os.path.join('../../foto',mydir)
 
     if os.path.exists(mydir):
         shutil.rmtree(mydir, ignore_errors=True)
@@ -23,25 +23,22 @@ def doDirs(mydir):
     dir_paths.append(mydir)
     
 
-
 def updateDB():
     '''把目录名写进csv文件
     '''
     
-    if not os.path.exists("../foto/webpic.csv"):
-        with open("../foto/webpic.csv", 'w') as fd:
+    if not os.path.exists("../../foto/webpic.csv"):
+        with open("../../foto/webpic.csv", 'w') as fd:
                 cfd = csv.writer(fd)
                 cfd.writerow(['datetime', 'folder name', 'numbers'])
     
-    with open("../foto/webpic.csv", 'a') as fd:
+        with open("../../foto/webpic.csv", 'a',newline='') as fd:
             cfd = csv.writer(fd)
             import time
             for item in dir_paths:
                 mydir = os.path.basename(item)
                 number = len(os.listdir(item))
                 cfd.writerow([time.asctime(), mydir, number])
-
-    
 
 
 def testURL(file_path):
@@ -63,6 +60,7 @@ def testURL(file_path):
                 else:
                     print("{} not OK".format(url))
 
+                    
 def down_file(url,cnt):
     """just download the URL to specified dir,
     the specified dir stores in the last element of dir_paths"""
@@ -83,7 +81,6 @@ def down_file(url,cnt):
             print(f'{url} download failed. Try to download it by setting proxy.')
             with open("downFailFiles.diz",mode='at+') as fd:
                 fd.write(file_name)
-
 
     def reporthook(a, b, c):
         """
@@ -112,6 +109,7 @@ def readDList(file_path):
 
     updateDB()
 
+    
 def main():
     try:
         file_path = sys.argv[1]
