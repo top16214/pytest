@@ -1,8 +1,9 @@
-
-# 下载 tujigu 上面的套图，单进程顺序下载，速度较慢
 # -*- coding:UTF-8 -*-
+# 下载 tujigu 上面的套图，单进程顺序下载，速度较慢
+
 from urllib import request
 from urllib import parse
+from urllib import error
 from bs4 import BeautifulSoup
 import os, sys
 from tqdm import tqdm
